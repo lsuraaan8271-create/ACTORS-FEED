@@ -3,188 +3,440 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Celebrity Gallery</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<title>San Calculation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Poppins,sans-serif;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-background:#0d1117;
-color:#fff;
-}
 
-header{
-background:linear-gradient(90deg,#6a11cb,#2575fc);
-padding:25px;
-text-align:center;
-font-size:32px;
-font-weight:bold;
-box-shadow:0 5px 20px rgba(0,0,0,.4);
-}
+height:100vh;
 
-.search{
 display:flex;
+
 justify-content:center;
-padding:20px;
-}
 
-.search input{
-width:90%;
-max-width:500px;
-padding:15px;
-border:none;
-border-radius:30px;
-font-size:18px;
-outline:none;
-}
+align-items:center;
 
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-padding:30px;
-}
-
-.card{
-background:#161b22;
-border-radius:20px;
 overflow:hidden;
-transition:.3s;
-box-shadow:0 10px 25px rgba(0,0,0,.4);
+
+background:#050816;
+
+color:white;
+
 }
 
-.card:hover{
-transform:translateY(-10px);
+/* Premium Aurora Background */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+width:700px;
+
+height:700px;
+
+background:#7c3aed;
+
+filter:blur(170px);
+
+top:-250px;
+
+left:-250px;
+
+opacity:.5;
+
+animation:move1 12s infinite alternate;
+
+z-index:-2;
+
 }
 
-.card img{
+body::after{
+
+content:"";
+
+position:fixed;
+
+width:700px;
+
+height:700px;
+
+background:#00d4ff;
+
+filter:blur(170px);
+
+bottom:-250px;
+
+right:-250px;
+
+opacity:.4;
+
+animation:move2 13s infinite alternate;
+
+z-index:-2;
+
+}
+
+@keyframes move1{
+
+100%{
+
+transform:translate(150px,120px);
+
+}
+
+}
+
+@keyframes move2{
+
+100%{
+
+transform:translate(-120px,-120px);
+
+}
+
+}
+
+.calculator{
+
+width:390px;
+
+padding:28px;
+
+border-radius:35px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(25px);
+
+border:1px solid rgba(255,255,255,.15);
+
+box-shadow:0 0 60px rgba(0,212,255,.25);
+
+}
+
+.logo{
+
+text-align:center;
+
+font-size:30px;
+
+font-weight:800;
+
+margin-bottom:25px;
+
+background:linear-gradient(90deg,#00d4ff,#8b5cf6,#facc15);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
+
+.display{
+
 width:100%;
-height:300px;
-object-fit:cover;
-}
 
-.info{
-padding:15px;
-text-align:center;
-}
+height:90px;
 
-.info h2{
-font-size:20px;
-margin-bottom:5px;
-}
+border:none;
 
-.info p{
-color:#aaa;
-}
+outline:none;
 
-footer{
+border-radius:20px;
+
 padding:20px;
-text-align:center;
-color:#aaa;
+
+font-size:34px;
+
+text-align:right;
+
+background:rgba(255,255,255,.1);
+
+color:white;
+
+margin-bottom:25px;
+
 }
+
+.buttons{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:15px;
+
+}
+
+button{
+
+height:70px;
+
+border:none;
+
+border-radius:18px;
+
+font-size:22px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.25s;
+
+background:rgba(255,255,255,.08);
+
+color:white;
+
+backdrop-filter:blur(15px);
+
+}
+
+button:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 0 25px rgba(0,212,255,.4);
+
+}
+
+.operator{
+
+background:linear-gradient(135deg,#06b6d4,#7c3aed);
+
+}
+
+.equal{
+
+background:linear-gradient(135deg,#16a34a,#00d4ff);
+
+grid-column:span 2;
+
+}
+
+.clear{
+
+background:linear-gradient(135deg,#ef4444,#f97316);
+
+}
+
 </style>
 
 </head>
+
 <body>
 
-<header>
-🌟 Indian & Hollywood Celebrity Gallery
-</header>
+<div class="calculator">
 
-<div class="search">
-<input type="text" id="search" placeholder="Search celebrity...">
-</div>
+<div class="logo">
 
-<div class="gallery" id="gallery">
+<i class="fa-solid fa-calculator"></i>
 
-<div class="card">
-<img src="images/shahrukh.jpg">
-<div class="info">
-<h2>Shah Rukh Khan</h2>
-<p>Bollywood Actor</p>
-</div>
-</div>
-
-<div class="card">
-<img src="images/deepika.jpg">
-<div class="info">
-<h2>Deepika Padukone</h2>
-<p>Bollywood Actress</p>
-</div>
-</div>
-
-<div class="card">
-<img src="images/salman.jpg">
-<div class="info">
-<h2>Salman Khan</h2>
-<p>Bollywood Actor</p>
-</div>
-</div>
-
-<div class="card">
-<img src="images/alia.jpg">
-<div class="info">
-<h2>Alia Bhatt</h2>
-<p>Bollywood Actress</p>
-</div>
-</div>
-
-<div class="card">
-<img src="images/tomholland.jpg">
-<div class="info">
-<h2>Tom Holland</h2>
-<p>Hollywood Actor</p>
-</div>
-</div>
-
-<div class="card">
-<img src="images/scarlett.jpg">
-<div class="info">
-<h2>Scarlett Johansson</h2>
-<p>Hollywood Actress</p>
-</div>
-</div>
-
-<div class="card">
-<img src="images/leonardo.jpg">
-<div class="info">
-<h2>Leonardo DiCaprio</h2>
-<p>Hollywood Actor</p>
-</div>
-</div>
-
-<div class="card">
-<img src="images/emma.jpg">
-<div class="info">
-<h2>Emma Watson</h2>
-<p>Hollywood Actress</p>
-</div>
-</div>
+San Calculation
 
 </div>
 
-<footer>
-© 2026 Celebrity Gallery
-</footer>
+<input
+type="text"
+id="display"
+class="display"
+readonly>
 
-<script>
-const search=document.getElementById("search");
-search.addEventListener("keyup",function(){
-let filter=this.value.toLowerCase();
-let cards=document.querySelectorAll(".card");
+<div class="buttons">
 
-cards.forEach(card=>{
-let text=card.innerText.toLowerCase();
-card.style.display=text.includes(filter)?"block":"none";
+<button class="clear" onclick="clearDisplay()">AC</button>
+
+<button onclick="backspace()">
+<i class="fa-solid fa-delete-left"></i>
+</button>
+
+<button onclick="append('%')">%</button>
+
+<button class="operator" onclick="append('/')">÷</button>
+
+<button onclick="append('7')">7</button>
+
+<button onclick="append('8')">8</button>
+
+<button onclick="append('9')">9</button>
+
+<button class="operator" onclick="append('*')">×</button>
+
+<button onclick="append('4')">4</button>
+
+<button onclick="append('5')">5</button>
+
+<button onclick="append('6')">6</button>
+
+<button class="operator" onclick="append('-')">−</button>
+
+<button onclick="append('1')">1</button>
+
+<button onclick="append('2')">2</button>
+
+<button onclick="append('3')">3</button>
+
+<button class="operator" onclick="append('+')">+</button>
+
+<button onclick="append('0')">0</button>
+
+<button onclick="append('.')">.</button>
+
+<button class="equal" onclick="calculate()">=</button>
+
+</div>
+
+</div><script>
+
+const display = document.getElementById("display");
+
+function append(value){
+    display.value += value;
+}
+
+function clearDisplay(){
+    display.value = "";
+}
+
+function backspace(){
+    display.value = display.value.slice(0,-1);
+}
+
+function calculate(){
+    try{
+        let exp = display.value.replace(/%/g,"/100");
+        display.value = eval(exp);
+    }catch{
+        display.value = "Error";
+        setTimeout(()=>{
+            display.value="";
+        },1200);
+    }
+}
+
+/* Keyboard Support */
+
+document.addEventListener("keydown",(e)=>{
+
+if((e.key>='0' && e.key<='9') ||
+e.key==='+' ||
+e.key==='-' ||
+e.key==='*' ||
+e.key==='/' ||
+e.key==='.' ||
+e.key==='(' ||
+e.key===')' ||
+e.key==='%'){
+
+append(e.key);
+
+}
+
+else if(e.key==="Enter"){
+
+e.preventDefault();
+
+calculate();
+
+}
+
+else if(e.key==="Backspace"){
+
+backspace();
+
+}
+
+else if(e.key==="Delete"){
+
+clearDisplay();
+
+}
+
 });
+
+/* Premium Button Click Animation */
+
+document.querySelectorAll("button").forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+btn.style.transform="scale(.92)";
+
+setTimeout(()=>{
+
+btn.style.transform="scale(1)";
+
+},120);
+
 });
+
+});
+
+/* Floating Particles */
+
+for(let i=0;i<35;i++){
+
+let p=document.createElement("div");
+
+p.style.position="fixed";
+
+p.style.width="5px";
+
+p.style.height="5px";
+
+p.style.borderRadius="50%";
+
+p.style.background="white";
+
+p.style.opacity=".25";
+
+p.style.left=Math.random()*100+"%";
+
+p.style.top=Math.random()*100+"%";
+
+p.style.pointerEvents="none";
+
+p.style.animation=`float ${8+Math.random()*8}s linear infinite`;
+
+document.body.appendChild(p);
+
+}
+
+const style=document.createElement("style");
+
+style.innerHTML=`
+@keyframes float{
+0%{
+transform:translateY(0px);
+opacity:.25;
+}
+50%{
+opacity:.7;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+`;
+
+document.head.appendChild(style);
+
 </script>
 
 </body>
